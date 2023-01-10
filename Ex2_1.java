@@ -5,8 +5,6 @@ import java.util.Random;
 import java.util.concurrent.*;
 
 public class Ex2_1 {
-
-
     /*public static String[] createTextFiles(int n, int seed, int bound){
        String[] filenames = new String[n];
        String filepath= "C:\\ADI";
@@ -94,7 +92,7 @@ public class Ex2_1 {
             System.out.println("error reading the file");
         }
      return count;}
-    public static int getNumOfLinesThreads(String[] fileNames){
+    public int getNumOfLinesThreads(String[] fileNames){
         int sumoflines=0;
         MyThread[] myThreads = new MyThread[fileNames.length];
         for(int i=0; i<fileNames.length; i++){
@@ -112,7 +110,7 @@ public class Ex2_1 {
             }
         }
     return sumoflines;}
-    public static int getNumOfLinesThreadPool(String[] fileNames) {
+    public int getNumOfLinesThreadPool(String[] fileNames) {
         int sumoflines=0;
         List<Future<Integer>> list=new ArrayList<Future<Integer>>();
         ExecutorService pool = Executors.newFixedThreadPool(fileNames.length);
@@ -132,23 +130,29 @@ public class Ex2_1 {
         pool.shutdown();
         return sumoflines;}
 
+
     public static void main(String[] args) {
-       String []s= createTextFiles(1000,4,100000);
+        Ex2_1 test=new Ex2_1();
+       String []s= createTextFiles(5000,4,100000);
         long startTime = System.currentTimeMillis();
-       // System.out.println(getNumOfLines(s));
+        System.out.println("num of files: 5,000");
+        System.out.print("num of lines: ");
+       System.out.println(getNumOfLines(s));
         long endTime   = System.currentTimeMillis();
         long totalTime = endTime - startTime;
         System.out.println("getNumOfLines: "+totalTime/(1000F));
         startTime = System.currentTimeMillis();
-        System.out.println(getNumOfLinesThreads(s));
+        test.getNumOfLinesThreads(s);
         endTime=System.currentTimeMillis();
         totalTime = endTime - startTime;
         System.out.println("getNumOfLinesThreads: "+totalTime/(1000F));
         startTime = System.currentTimeMillis();
-        System.out.println(getNumOfLinesThreadPool(s));
+        test.getNumOfLinesThreadPool(s);
         endTime=System.currentTimeMillis();
         totalTime = endTime - startTime;
         System.out.println("getNumOfLinesThreadPool: "+totalTime/(1000F));
+
+
     }
 
 }
